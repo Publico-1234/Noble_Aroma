@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descuentos | Noble Aroma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="../img/logo/logo cafe.png" type="image/png" />
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+  
+ <section class="banner-interno" style="padding: 60px 10% 40px; text-align: center;">
+    <span class="titulo-etiqueta">OFERTAS ESPECIALES</span>
+    <h1 style="color: #173D2D; font-size: clamp(32px, 5vw, 44px); margin: 10px 0; font-family: 'Playfair Display', serif;">Promociones de Miércoles</h1>
+    <p style="color: #6B4632; line-height: 1.6; max-width: 600px; margin: 0 auto;">Aprovecha nuestros combos exclusivos por tiempo limitado.</p>
+  </section>
+
+  <section class="descuentos-grid animar-scroll">
+    <div class="tarjeta-descuento">
+      <div class="descuento-header">
+        <h3>Combo 1</h3>
+      </div>
+      <div class="descuento-body">
+        <p><strong>Capuccino Original</strong> + Porción de Torta de Zanahoria</p>
+        <p>Disfruta de la mezcla perfecta entre café y repostería casera.</p>
+        <span class="codigo-descuento">$14.000</span>
+      </div>
+    </div>
+    <div class="tarjeta-descuento">
+      <div class="descuento-header">
+        <h3>Combo 2</h3>
+      </div>
+      <div class="descuento-body">
+        <p><strong>Capuccino Original</strong> + Porción de Torta de Chocolate</p>
+        <p>Para los amantes del chocolate y el buen café.</p>
+        <span class="codigo-descuento">$14.000</span>
+      </div>
+    </div>
+    <div class="tarjeta-descuento">
+      <div class="descuento-header">
+        <h3>Mocaccino + Galletas</h3>
+      </div>
+      <div class="descuento-body">
+        <p><strong>Mocaccino Frío</strong> + Porción de Mini Galletas con Oreo</p>
+        <p>El combo perfecto para una tarde dulce.</p>
+        <span class="codigo-descuento">$10.000</span>
+      </div>
+    </div>
+  </section>
+
+ <div id="footer-placeholder"></div>
+
+  <div id="overlay-carrito" class="overlay-carrito"></div>
+  <aside id="panel-carrito" class="panel-carrito">
+    <div class="panel-header">
+      <h2>Tu Carrito</h2>
+      <button class="cerrar-panel" id="cerrar-panel">&times;</button>
+    </div>
+    <div class="panel-body">
+      <div id="lista-carrito" class="lista-carrito"></div>
+      <div id="carrito-vacio" class="carrito-vacio" hidden>
+        <p>Tu carrito está vacío.</p>
+        <a href="productos.html" class="boton-leer-mas">Ver Productos</a>
+      </div>
+    </div>
+    <div class="panel-footer" id="resumen-carrito" hidden>
+      <div class="linea-resumen"><span>Subtotal</span><span id="subtotal">$0</span></div>
+      <div class="linea-resumen"><span>Envío</span><span>Gratis</span></div>
+      <div class="linea-resumen total"><span>Total</span><span id="total-final">$0</span></div>
+      <button id="btn-pagar" class="boton-confirmar">Proceder al Pago</button>
+      <button id="btn-vaciar" class="boton-vaciar">Vaciar carrito</button>
+    </div>
+  </aside>
+  <div id="modal-checkout" class="modal-overlay">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="cerrar-checkout">&times;</button>
+      <h2 style="font-family: 'Playfair Display', serif; color: #173D2D; margin-top: 0;">Finalizar Compra</h2>
+      <form id="form-checkout" class="modal-formulario">
+        <label>Nombre completo</label>
+        <input type="text" id="checkout-nombre" placeholder="Tu nombre" required>
+        <label>Dirección de entrega</label>
+        <input type="text" id="checkout-direccion" placeholder="Ej. Cra 24 #18-11" required>
+        <label>Teléfono de contacto</label>
+        <input type="tel" id="checkout-telefono" placeholder="Ej. 300 123 4567" required>
+        <label>Método de Pago</label>
+        <div class="opciones-pedido">
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Tarjeta de Crédito/Débito" checked>
+            Tarjeta de Crédito/Débito</label>
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Pago en Efectivo"> Pago en Efectivo
+            (Contra entrega)</label>
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Transferencia Bancaria">
+            Transferencia Bancaria</label>
+        </div>
+        <button type="submit" class="boton-confirmar">Confirmar y Pagar</button>
+      </form>
+    </div>
+  </div>
+  <script src="../js/principal.js"></script>
+  <script src="../js/carrito.js"></script>
+</body>
+
+</html>
