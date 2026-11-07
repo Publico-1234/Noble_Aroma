@@ -80,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Delegación global para abrir el panel al hacer clic en el carrito del header
   document.addEventListener("click", (e) => {
     const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #Carro");
     if (btnAbrir) {
