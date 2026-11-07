@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const path = window.location.pathname;
-  const isSubfolder = path.includes("/html/");
+  const isSubfolder = window.location.pathname.includes("/html/");
   const headerPath = isSubfolder ? "header.html" : "html/header.html";
   const footerPath = isSubfolder ? "footer.html" : "html/footer.html";
 
@@ -10,15 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(response => response.text())
       .then(data => {
         headerContainer.innerHTML = data;
+        const logoImg = headerContainer.querySelector(".logo-icono-img");
+        if (logoImg) logoImg.src = "/Noble_Aroma/img/logo/Logo-de-Cafeteria-Noble-Aroma.png";
+
+        const carroImg = headerContainer.querySelector("#Carro");
+        if (carroImg) carroImg.src = "/Noble_Aroma/img/icos/01_carrito.png";
 
         const prefix = isSubfolder ? "../" : "";
         const htmlPrefix = isSubfolder ? "" : "html/";
-
-        const logoImg = headerContainer.querySelector(".logo-icono-img");
-        if (logoImg) logoImg.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
-
-        const carroImg = headerContainer.querySelector("#Carro");
-        if (carroImg) carroImg.src = `${prefix}img/icos/01_carrito.png`;
 
         const btnInicio = document.getElementById("inicio");
         const logoInicio = headerContainer.querySelector(".logo-container");
@@ -46,12 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(response => response.text())
       .then(data => {
         footerContainer.innerHTML = data;
-        const prefix = isSubfolder ? "../" : "";
-        const htmlPrefix = isSubfolder ? "" : "html/";
 
         const footerLogo = footerContainer.querySelector(".footer-logo");
-        if (footerLogo) footerLogo.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
+        if (footerLogo) footerLogo.src = "/Noble_Aroma/img/logo/Logo-de-Cafeteria-Noble-Aroma.png";
 
+        const prefix = isSubfolder ? "../" : "";
+        const htmlPrefix = isSubfolder ? "" : "html/";
         const enlacesFooter = footerContainer.querySelectorAll(".footer-columna ul a");
         if (enlacesFooter.length >= 4) {
           enlacesFooter[0].setAttribute("href", `${prefix}index.html`);
