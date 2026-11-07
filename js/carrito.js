@@ -1,41 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const panelCarrito = document.getElementById("panel-carrito");
-  const overlayCarrito = document.getElementById("overlay-carrito");
-  const cerrarPanel = document.getElementById("cerrar-panel");
-
-  document.addEventListener("click", (e) => {
-    const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #btn-abrir-carrito-centro");
-    if (btnAbrir) {
-      e.preventDefault();
-      const panel = document.getElementById("panel-carrito");
-      const overlay = document.getElementById("overlay-carrito");
-      if (panel && overlay) {
-        renderizarCarritoPanel();
-        panel.classList.add("active");
-        overlay.classList.add("active");
-      }
-    }
-  });
-
-  if (cerrarPanel) {
-    cerrarPanel.addEventListener("click", () => {
-      if (panelCarrito) panelCarrito.classList.remove("active");
-      if (overlayCarrito) overlayCarrito.classList.remove("active");
-    });
+  function ajustarRutaImagen(ruta) {
+    if (!ruta) return "";
+    const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
+    return `/Noble_Aroma/${rutaLimpia}`;
   }
 
-  if (overlayCarrito) {
-    overlayCarrito.addEventListener("click", () => {
-      if (panelCarrito) panelCarrito.classList.remove("active");
-      overlayCarrito.classList.remove("active");
-    });
+  function pesos(valor) {
+    return (valor || 0).toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
   }
-
-function ajustarRutaImagen(ruta) {
-  if (!ruta) return "";
-  const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
-  return `/Noble_Aroma/${rutaLimpia}`;
-}
 
   function renderizarCarritoPanel() {
     const lista = document.getElementById("lista-carrito");
@@ -57,8 +29,6 @@ function ajustarRutaImagen(ruta) {
 
     if (carritoVacio) carritoVacio.hidden = true;
     if (resumen) resumen.hidden = false;
-
-    const pesos = (valor) => valor.toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
 
     lista.innerHTML = carrito.map((item, index) => `
       <div class="item-carrito">
@@ -109,6 +79,30 @@ function ajustarRutaImagen(ruta) {
       });
     });
   }
+
+  // Delegación global para abrir el panel al hacer clic en el carrito del header
+  document.addEventListener("click", (e) => {
+    const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #Carro");
+    if (btnAbrir) {
+      e.preventDefault();
+      const panel = document.getElementById("panel-carrito");
+      const overlay = document.getElementById("overlay-carrito");
+      if (panel && overlay) {
+        renderizarCarritoPanel();
+        panel.classList.add("active");
+        overlay.classList.add("active");
+      }
+    }
+
+    if (e.target.closest("#cerrar-panel") || e.target.id === "overlay-carrito") {
+      const panel = document.getElementById("panel-carrito");
+      const overlay = document.getElementById("overlay-carrito");
+      if (panel) panel.classList.remove("active");
+      if (overlay) overlay.classList.remove("active");
+    }
+  });
+
+  window.addEventListener("carritoActualizado", renderizarCarritoPanel);
 
   const modalCheckout = document.getElementById("modal-checkout");
   const cerrarCheckout = document.getElementById("cerrar-checkout");
