@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const headerPlaceholder = document.getElementById("header-placeholder");
   if (headerPlaceholder) {
-    fetch("html/header.html")
+    fetch("..html/header.html")
       .then(res => res.text())
       .then(data => {
         headerPlaceholder.innerHTML = data;
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const footerPlaceholder = document.getElementById("footer-placeholder");
   if (footerPlaceholder) {
-    fetch("html/footer.html")
+    fetch("..html/footer.html")
       .then(res => res.text())
       .then(data => {
         footerPlaceholder.innerHTML = data;
