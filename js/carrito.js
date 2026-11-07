@@ -145,3 +145,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderizarCarritoPanel();
 });
+
+document.addEventListener("click", (e) => {
+  const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #btn-abrir-carrito-centro, #Carro");
+  if (btnAbrir) {
+    e.preventDefault();
+    const panelCarrito = document.getElementById("panel-carrito");
+    const overlayCarrito = document.getElementById("overlay-carrito");
+    if (panelCarrito && overlayCarrito) {
+      renderizarCarritoPanel();
+      panelCarrito.classList.add("active");
+      overlayCarrito.classList.add("active");
+    }
+  }
+});
