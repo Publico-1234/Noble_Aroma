@@ -13,18 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(data => {
         headerContainer.innerHTML = data;
 
-        
         const prefix = isSubfolder ? "../" : "";
         const htmlPrefix = isSubfolder ? "" : "html/";
 
-      
         const logoImg = headerContainer.querySelector(".logo-icono-img");
         if (logoImg) logoImg.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
 
         const carroImg = headerContainer.querySelector("#Carro");
         if (carroImg) carroImg.src = `${prefix}img/icos/01-carrito.png`;
 
-       
         const btnInicio = document.getElementById("inicio");
         const logoInicio = headerContainer.querySelector(".logo-container");
         const btnProductos = document.getElementById("productos");
@@ -55,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then(data => {
         footerContainer.innerHTML = data;
+
         const prefix = isSubfolder ? "../" : "";
         const htmlPrefix = isSubfolder ? "" : "html/";
 
