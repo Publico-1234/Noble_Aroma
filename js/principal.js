@@ -10,29 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(data => {
         headerPlaceholder.innerHTML = data;
 
-        const prefix = isSubfolder ? "../" : "";
-        const htmlPrefix = isSubfolder ? "" : "html/";
+        const enlacesNav = document.querySelectorAll(".nav .buttonHeader");
+        const rutaActual = window.location.pathname;
 
-        const logoImg = headerPlaceholder.querySelector(".logo-icono-img");
-        if (logoImg) logoImg.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
+        enlacesNav.forEach(enlace => {
+          enlace.classList.remove("active");
+          const href = enlace.getAttribute("href");
 
-        const carroImg = headerPlaceholder.querySelector("#Carro");
-        if (carroImg) carroImg.src = `${prefix}img/icos/01_carrito.png`;
+          if (rutaActual.endsWith(href) || (href === "index.html" && (rutaActual.endsWith("/") || rutaActual.endsWith("index.html")))) {
+            enlace.classList.add("active");
+          }
+        });
 
-        const btnInicio = headerPlaceholder.querySelector("#inicio");
-        const logoInicio = headerPlaceholder.querySelector(".logo-container");
-        const btnProductos = headerPlaceholder.querySelector("#productos");
-        const btnDescuentos = headerPlaceholder.querySelector("#descuentos");
-        const btnAcerca = headerPlaceholder.querySelector("#acerca");
-
-        if (btnInicio) btnInicio.setAttribute("href", `${prefix}index.html`);
-        if (logoInicio) logoInicio.setAttribute("href", `${prefix}index.html`);
-        if (btnProductos) btnProductos.setAttribute("href", `${htmlPrefix}productos.html`);
-        if (btnDescuentos) btnDescuentos.setAttribute("href", `${htmlPrefix}descuentos.html`);
-        if (btnAcerca) btnAcerca.setAttribute("href", `${htmlPrefix}conocenos.html`);
-
-        const menuToggle = headerPlaceholder.querySelector("#menu-toggle");
-        const navMenu = headerPlaceholder.querySelector("#nav-menu");
+        const menuToggle = document.getElementById("menu-toggle");
+        const navMenu = document.getElementById("nav-menu");
         if (menuToggle && navMenu) {
           menuToggle.addEventListener("click", () => navMenu.classList.toggle("active"));
         }
@@ -45,23 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.text())
       .then(data => {
         footerPlaceholder.innerHTML = data;
-
-        const prefix = isSubfolder ? "../" : "";
-        const htmlPrefix = isSubfolder ? "" : "html/";
-
-        const footerLogo = footerPlaceholder.querySelector(".footer-logo");
-        if (footerLogo) footerLogo.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
-
-        const enlacesFooter = footerPlaceholder.querySelectorAll(".footer-col ul a, .footer-bootom a");
-        enlacesFooter.forEach(a => {
-          const href = a.getAttribute("href");
-          if (href && !href.startsWith("http") && !href.startsWith("#")) {
-            if (href.startsWith("productos.html")) a.setAttribute("href", `${htmlPrefix}${href}`);
-            else if (href.startsWith("descuentos.html")) a.setAttribute("href", `${htmlPrefix}${href}`);
-            else if (href.startsWith("conocenos.html")) a.setAttribute("href", `${htmlPrefix}${href}`);
-            else if (href.startsWith("index.html")) a.setAttribute("href", `${prefix}${href}`);
-          }
-        });
       });
   }
 
