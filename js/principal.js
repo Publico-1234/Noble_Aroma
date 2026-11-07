@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const isSubfolder = window.location.pathname.includes("/html/");
-  const headerPath = isSubfolder ? "header.html" : "html/header.html";
-  const footerPath = isSubfolder ? "footer.html" : "html/footer.html";
+  const headerPath = isSubfolder ? "header.html" : "../html/header.html";
+  const footerPath = isSubfolder ? "footer.html" : "../html/footer.html";
 
   const headerPlaceholder = document.getElementById("header-placeholder");
   if (headerPlaceholder) {
