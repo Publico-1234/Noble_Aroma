@@ -5,25 +5,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
     const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #btn-abrir-carrito-centro");
-    if (btnAbrir && panelCarrito && overlayCarrito) {
+    if (btnAbrir) {
       e.preventDefault();
-      panelCarrito.classList.add("active");
-      overlayCarrito.classList.add("active");
+      const panel = document.getElementById("panel-carrito");
+      const overlay = document.getElementById("overlay-carrito");
+      if (panel && overlay) {
+        renderizarCarritoPanel();
+        panel.classList.add("active");
+        overlay.classList.add("active");
+      }
     }
   });
 
   if (cerrarPanel) {
     cerrarPanel.addEventListener("click", () => {
-      panelCarrito.classList.remove("active");
-      overlayCarrito.classList.remove("active");
+      if (panelCarrito) panelCarrito.classList.remove("active");
+      if (overlayCarrito) overlayCarrito.classList.remove("active");
     });
   }
 
   if (overlayCarrito) {
     overlayCarrito.addEventListener("click", () => {
-      panelCarrito.classList.remove("active");
+      if (panelCarrito) panelCarrito.classList.remove("active");
       overlayCarrito.classList.remove("active");
     });
+  }
+
+  function ajustarRutaImagen(ruta) {
+    if (!ruta) return "";
+    const esSubcarpeta = window.location.pathname.includes("/html/");
+    const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
+    return esSubcarpeta ? `../${rutaLimpia}` : rutaLimpia;
   }
 
   function renderizarCarritoPanel() {
@@ -51,10 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lista.innerHTML = carrito.map((item, index) => `
       <div class="item-carrito">
-        <img src="${item.imagen}" alt="${item.nombre}">
+        <img src="${ajustarRutaImagen(item.imagen)}" alt="${item.nombre}">
         <div class="item-info">
           <h3>${item.nombre}</h3>
-          <p class="item-notas">${item.notas}</p>
+          <p class="item-notas">${item.notas || ""}</p>
           <p class="item-precio">${pesos(item.precio)}</p>
         </div>
         <div class="item-acciones">
@@ -69,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `).join("");
 
-    const total = carrito.reduce((sum, item) => sum + item.total, 0);
+    const total = carrito.reduce((sum, item) => sum + (item.total || 0), 0);
     if (subtotalEl) subtotalEl.textContent = pesos(total);
     if (totalEl) totalEl.textContent = pesos(total);
 
@@ -77,13 +89,13 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener('click', (e) => {
         const index = e.target.dataset.index;
         const action = e.target.dataset.action;
-        let carrito = JSON.parse(localStorage.getItem("carritoNobleAroma")) || [];
+        let carritoData = JSON.parse(localStorage.getItem("carritoNobleAroma")) || [];
 
-        if (action === 'sumar') carrito[index].cantidad += 1;
-        if (action === 'restar' && carrito[index].cantidad > 1) carrito[index].cantidad -= 1;
+        if (action === 'sumar') carritoData[index].cantidad += 1;
+        if (action === 'restar' && carritoData[index].cantidad > 1) carritoData[index].cantidad -= 1;
 
-        carrito[index].total = carrito[index].precio * carrito[index].cantidad;
-        localStorage.setItem("carritoNobleAroma", JSON.stringify(carrito));
+        carritoData[index].total = carritoData[index].precio * carritoData[index].cantidad;
+        localStorage.setItem("carritoNobleAroma", JSON.stringify(carritoData));
         renderizarCarritoPanel();
       });
     });
@@ -91,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
     lista.querySelectorAll('.btn-eliminar').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const index = e.target.dataset.index;
-        let carrito = JSON.parse(localStorage.getItem("carritoNobleAroma")) || [];
-        carrito.splice(index, 1);
-        localStorage.setItem("carritoNobleAroma", JSON.stringify(carrito));
+        let carritoData = JSON.parse(localStorage.getItem("carritoNobleAroma")) || [];
+        carritoData.splice(index, 1);
+        localStorage.setItem("carritoNobleAroma", JSON.stringify(carritoData));
         renderizarCarritoPanel();
       });
     });
@@ -122,8 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (formCheckout) {
     formCheckout.addEventListener("submit", (e) => {
       e.preventDefault();
-      const nombre = document.getElementById("checkout-nombre").value;
-      modalCheckout.style.display = "none";
+      const nombreInput = document.getElementById("checkout-nombre");
+      const nombre = nombreInput ? nombreInput.value : "Cliente";
+      if (modalCheckout) modalCheckout.style.display = "none";
 
       const toast = document.createElement("div");
       toast.className = "toast-notificacion visible";
@@ -132,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         localStorage.removeItem("carritoNobleAroma");
-        window.location.href = "index.html";
+        window.location.href = "/Noble_Aroma/index.html";
       }, 3000);
     });
   }
