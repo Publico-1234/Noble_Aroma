@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   let productoSeleccionado = null;
-  if (!lista) return;
 
   function pesos(valor) {
     return valor.toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
@@ -162,6 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function mostrarProductos(resultados) {
+    if (!lista) return;
     lista.innerHTML = resultados.map(crearTarjetaHTML).join("");
     if (contador) contador.textContent = `${resultados.length} productos`;
     if (sinProductos) sinProductos.hidden = resultados.length > 0;
@@ -175,10 +175,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function filtrarProductos() {
+    if (!buscador) return;
     const textoBusqueda = normalizarTexto(buscador.value);
     const palabrasBusqueda = textoBusqueda.split(/\s+/).filter(p => p.length > 0);
     const categoria = categoriaSeleccionada();
-    const maximo = Number(precioMaximo.value);
+    const maximo = Number(precioMaximo ? precioMaximo.value : 13800);
 
     let resultados = productos.filter((producto) => {
       const nombreNormalizado = normalizarTexto(producto.nombre);
@@ -188,27 +189,29 @@ document.addEventListener("DOMContentLoaded", () => {
       return coincideNombre && coincideCategoria && coincidePrecio;
     });
 
-    switch (orden.value) {
-      case "menor": resultados.sort((a, b) => a.precio - b.precio); break;
-      case "mayor": resultados.sort((a, b) => b.precio - a.precio); break;
-      case "nombre": resultados.sort((a, b) => a.nombre.localeCompare(b.nombre, "es")); break;
-      default: resultados.sort((a, b) => a.id - b.id);
+    if (orden) {
+      switch (orden.value) {
+        case "menor": resultados.sort((a, b) => a.precio - b.precio); break;
+        case "mayor": resultados.sort((a, b) => b.precio - a.precio); break;
+        case "nombre": resultados.sort((a, b) => a.nombre.localeCompare(b.nombre, "es")); break;
+        default: resultados.sort((a, b) => a.id - b.id);
+      }
     }
 
     mostrarProductos(resultados);
   }
 
   function actualizarPrecio() {
-    if (valorPrecio) valorPrecio.textContent = pesos(Number(precioMaximo.value));
+    if (valorPrecio && precioMaximo) valorPrecio.textContent = pesos(Number(precioMaximo.value));
     filtrarProductos();
   }
 
   function limpiarFiltros() {
-    buscador.value = "";
+    if (buscador) buscador.value = "";
     const radioTodas = document.querySelector('input[name="categoria"][value="Todas"]');
     if (radioTodas) radioTodas.checked = true;
-    precioMaximo.value = precioMaximo.max;
-    orden.value = "destacados";
+    if (precioMaximo) precioMaximo.value = precioMaximo.max;
+    if (orden) orden.value = "destacados";
     actualizarPrecio();
   }
 
@@ -225,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnVerTodos = document.getElementById("verTodos");
   if (btnVerTodos) btnVerTodos.addEventListener("click", limpiarFiltros);
 
-  function abrirModal(evento) {
+  document.addEventListener("click", (evento) => {
     const boton = evento.target.closest(".boton-producto, .tarjeta-destacado");
     if (!boton) return;
 
@@ -233,20 +236,18 @@ document.addEventListener("DOMContentLoaded", () => {
     productoSeleccionado = productos.find((item) => item.id === id);
 
     if (productoSeleccionado && modal) {
-      modalImg.src = obtenerRutaImagen(productoSeleccionado.imagen);
-      modalNombre.textContent = productoSeleccionado.nombre;
-      modalPrecio.textContent = pesos(productoSeleccionado.precio);
-      document.getElementById("cantidad").value = 1;
+      if (modalImg) modalImg.src = obtenerRutaImagen(productoSeleccionado.imagen);
+      if (modalNombre) modalNombre.textContent = productoSeleccionado.nombre;
+      if (modalPrecio) modalPrecio.textContent = pesos(productoSeleccionado.precio);
+      const cant = document.getElementById("cantidad");
+      if (cant) cant.value = 1;
 
       const checkboxes = document.querySelectorAll('input[name="preferencia"]');
       checkboxes.forEach(chk => chk.checked = false);
 
       modal.style.display = "flex";
     }
-  }
-
-  if (lista) lista.addEventListener("click", abrirModal);
-  if (listaDestacados) listaDestacados.addEventListener("click", abrirModal);
+  });
 
   if (cerrarModalBtn) {
     cerrarModalBtn.addEventListener("click", () => modal.style.display = "none");
@@ -261,7 +262,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (formPedido) {
     formPedido.addEventListener("submit", (e) => {
       e.preventDefault();
-      const cantidad = parseInt(document.getElementById("cantidad").value);
+      const cantEl = document.getElementById("cantidad");
+      const cantidad = cantEl ? parseInt(cantEl.value) : 1;
       const checkboxesMarcados = document.querySelectorAll('input[name="preferencia"]:checked');
 
       let preferenciasSeleccionadas = [];
@@ -283,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
       carrito.push(pedido);
       localStorage.setItem("carritoNobleAroma", JSON.stringify(carrito));
 
-      modal.style.display = "none";
+      if (modal) modal.style.display = "none";
       window.dispatchEvent(new Event("carritoActualizado"));
 
       const panel = document.getElementById("panel-carrito");
@@ -298,5 +300,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   mostrarDestacados();
-  actualizarPrecio();
+  if (lista) actualizarPrecio();
 });
