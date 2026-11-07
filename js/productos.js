@@ -1,5 +1,5 @@
 const productos = [
-  { id: 1, nombre: "Galletas NY", categoria: "reposteria", precio: 6500, imagen: "img/productos/galletas NY.jpeg" },
+  { id: 1, nombre: "Galletas NY", categoria: "reposteria", precio: 6500, imagen: "img/productos/galletasNY.jpeg" },
   { id: 2, nombre: "Torta de zanahoria", categoria: "reposteria", precio: 8500, imagen: "img/productos/Torta-de-zanahoria.jpeg" },
   { id: 3, nombre: "Cheesecake", categoria: "reposteria", precio: 12000, imagen: "img/productos/cheesecake.jpeg" },
   { id: 4, nombre: "Espiral de queso", categoria: "reposteria", precio: 5000, imagen: "img/productos/Espiral-de-queso.jpeg" },
