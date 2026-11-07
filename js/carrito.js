@@ -81,8 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("click", (e) => {
-    const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #Carro");
-    if (btnAbrir) {
+    const btnAbrirHeader = e.target.closest("#btn-abrir-carrito-global, #Carro, #btn-abrir-carrito-centro");
+    if (btnAbrirHeader) {
       e.preventDefault();
       const panel = document.getElementById("panel-carrito");
       const overlay = document.getElementById("overlay-carrito");
@@ -99,50 +99,41 @@ document.addEventListener("DOMContentLoaded", () => {
       if (panel) panel.classList.remove("active");
       if (overlay) overlay.classList.remove("active");
     }
+
+    if (e.target.id === "btn-pagar") {
+      const modalCheckout = document.getElementById("modal-checkout");
+      if (modalCheckout) modalCheckout.style.display = "flex";
+    }
+
+    if (e.target.id === "cerrar-checkout" || e.target.id === "modal-checkout") {
+      const modalCheckout = document.getElementById("modal-checkout");
+      if (modalCheckout) modalCheckout.style.display = "none";
+    }
   });
 
   window.addEventListener("carritoActualizado", renderizarCarritoPanel);
 
-  const modalCheckout = document.getElementById("modal-checkout");
-  const cerrarCheckout = document.getElementById("cerrar-checkout");
   const formCheckout = document.getElementById("form-checkout");
-  const btnPagar = document.getElementById("btn-pagar");
-  const btnVaciar = document.getElementById("btn-vaciar");
-
-  if (btnPagar && modalCheckout) {
-    btnPagar.addEventListener("click", () => modalCheckout.style.display = "flex");
-  }
-
-  if (cerrarCheckout && modalCheckout) {
-    cerrarCheckout.addEventListener("click", () => modalCheckout.style.display = "none");
-  }
-
-  if (modalCheckout) {
-    modalCheckout.addEventListener("click", (e) => {
-      if (e.target === modalCheckout) modalCheckout.style.display = "none";
-    });
-  }
-
   if (formCheckout) {
     formCheckout.addEventListener("submit", (e) => {
       e.preventDefault();
       const nombreInput = document.getElementById("checkout-nombre");
       const nombre = nombreInput ? nombreInput.value : "Cliente";
+      const modalCheckout = document.getElementById("modal-checkout");
       if (modalCheckout) modalCheckout.style.display = "none";
 
-      const toast = document.createElement("div");
-      toast.className = "toast-notificacion visible";
-      toast.innerHTML = `<p>Pedido confirmado para ${nombre}. ¡Gracias por tu compra!</p>`;
-      document.body.appendChild(toast);
+      alert(`¡Pedido confirmado para ${nombre}! Gracias por tu compra en Noble Aroma.`);
 
-      setTimeout(() => {
-        localStorage.removeItem("carritoNobleAroma");
-        const esSubcarpeta = window.location.pathname.includes("/html/");
-        window.location.href = esSubcarpeta ? "../index.html" : "index.html";
-      }, 3000);
+      localStorage.removeItem("carritoNobleAroma");
+      renderizarCarritoPanel();
+      const panel = document.getElementById("panel-carrito");
+      const overlay = document.getElementById("overlay-carrito");
+      if (panel) panel.classList.remove("active");
+      if (overlay) overlay.classList.remove("active");
     });
   }
 
+  const btnVaciar = document.getElementById("btn-vaciar");
   if (btnVaciar) {
     btnVaciar.addEventListener("click", () => {
       if (confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
