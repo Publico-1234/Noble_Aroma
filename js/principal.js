@@ -12,21 +12,35 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then(data => {
         headerContainer.innerHTML = data;
-        
 
+        // Rutas relativas dinámicas según la ubicación actual
+        const prefix = isSubfolder ? "../" : "";
+        const htmlPrefix = isSubfolder ? "" : "html/";
+
+        // Corregir imágenes dentro del header
+        const logoImg = headerContainer.querySelector(".logo-icono-img");
+        if (logoImg) logoImg.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
+
+        const carroImg = headerContainer.querySelector("#Carro");
+        if (carroImg) carroImg.src = `${prefix}img/icos/01-carrito.png`;
+
+        // Corregir enlaces del menú
         const btnInicio = document.getElementById("inicio");
-        const logoInicio = document.querySelector(".logo-container");
-        const rutaInicio = isSubfolder ? "../index.html" : "index.html";
+        const logoInicio = headerContainer.querySelector(".logo-container");
+        const btnProductos = document.getElementById("productos");
+        const btnDescuentos = document.getElementById("descuentos");
+        const btnAcerca = document.getElementById("acerca");
 
-        if (btnInicio) btnInicio.setAttribute("href", rutaInicio);
-        if (logoInicio) logoInicio.setAttribute("href", rutaInicio);
+        if (btnInicio) btnInicio.setAttribute("href", `${prefix}index.html`);
+        if (logoInicio) logoInicio.setAttribute("href", `${prefix}index.html`);
+        if (btnProductos) btnProductos.setAttribute("href", `${htmlPrefix}productos.html`);
+        if (btnDescuentos) btnDescuentos.setAttribute("href", `${htmlPrefix}descuentos.html`);
+        if (btnAcerca) btnAcerca.setAttribute("href", `${htmlPrefix}conocenos.html`);
 
         const menuToggle = document.getElementById("menu-toggle");
         const navMenu = document.getElementById("nav-menu");
         if (menuToggle && navMenu) {
-          menuToggle.addEventListener("click", () => {
-            navMenu.classList.toggle("active");
-          });
+          menuToggle.addEventListener("click", () => navMenu.classList.toggle("active"));
         }
       })
       .catch(error => console.error("Error al cargar el header:", error));
@@ -41,29 +55,20 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then(data => {
         footerContainer.innerHTML = data;
+        const prefix = isSubfolder ? "../" : "";
+        const htmlPrefix = isSubfolder ? "" : "html/";
+
+        const footerLogo = footerContainer.querySelector(".footer-logo");
+        if (footerLogo) footerLogo.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
+
+        const enlacesFooter = footerContainer.querySelectorAll(".footer-columna ul a");
+        if (enlacesFooter.length >= 4) {
+          enlacesFooter[0].setAttribute("href", `${prefix}index.html`);
+          enlacesFooter[1].setAttribute("href", `${htmlPrefix}productos.html`);
+          enlacesFooter[2].setAttribute("href", `${htmlPrefix}descuentos.html`);
+          enlacesFooter[3].setAttribute("href", `${htmlPrefix}conocenos.html`);
+        }
       })
       .catch(error => console.error("Error al cargar el footer:", error));
   }
 });
-function mostrarHito(indice) {
-  const nodos = document.querySelectorAll('.timeline-nodo');
-  const hitos = document.querySelectorAll('.timeline-hito');
-
-  nodos.forEach(nodo => nodo.classList.remove('active'));
-  hitos.forEach(hito => hito.classList.remove('active'));
-
-  if (nodos[indice]) nodos[indice].classList.add('active');
-  if (hitos[indice]) hitos[indice].classList.add('active');
-}
-
-function cambiarTab(event, tabId) {
-  const botones = document.querySelectorAll('.btn-tab');
-  const contenidos = document.querySelectorAll('.tab-contenido');
-
-  botones.forEach(btn => btn.classList.remove('active'));
-  contenidos.forEach(c => c.classList.remove('active'));
-
-  event.currentTarget.classList.add('active');
-  const objetivo = document.getElementById(tabId);
-  if (objetivo) objetivo.classList.add('active');
-}
