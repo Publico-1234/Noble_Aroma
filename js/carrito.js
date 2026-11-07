@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function ajustarRutaImagen(ruta) {
-    if (!ruta) return "";
-    const esSubcarpeta = window.location.pathname.includes("/html/");
-    const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
-    return esSubcarpeta ? `../${rutaLimpia}` : rutaLimpia;
-  }
+function ajustarRutaImagen(ruta) {
+  if (!ruta) return "";
+  const esSubcarpeta = window.location.pathname.includes("/html/");
+  const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
+  return esSubcarpeta ? `../${rutaLimpia}` : rutaLimpia;
+}
 
   function renderizarCarritoPanel() {
     const lista = document.getElementById("lista-carrito");
