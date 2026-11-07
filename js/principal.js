@@ -13,18 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(data => {
         headerContainer.innerHTML = data;
 
-        // Rutas relativas dinámicas según la ubicación actual
+        
         const prefix = isSubfolder ? "../" : "";
         const htmlPrefix = isSubfolder ? "" : "html/";
 
-        // Corregir imágenes dentro del header
+      
         const logoImg = headerContainer.querySelector(".logo-icono-img");
         if (logoImg) logoImg.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
 
         const carroImg = headerContainer.querySelector("#Carro");
         if (carroImg) carroImg.src = `${prefix}img/icos/01-carrito.png`;
 
-        // Corregir enlaces del menú
+       
         const btnInicio = document.getElementById("inicio");
         const logoInicio = headerContainer.querySelector(".logo-container");
         const btnProductos = document.getElementById("productos");
