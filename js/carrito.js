@@ -33,9 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function ajustarRutaImagen(ruta) {
   if (!ruta) return "";
-  const esSubcarpeta = window.location.pathname.includes("/html/");
   const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
-  return esSubcarpeta ? `../${rutaLimpia}` : rutaLimpia;
+  return `/Noble_Aroma/${rutaLimpia}`;
 }
 
   function renderizarCarritoPanel() {
