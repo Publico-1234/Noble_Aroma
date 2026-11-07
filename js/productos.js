@@ -41,9 +41,11 @@ function normalizarTexto(texto) {
 
 function obtenerRutaImagen(ruta) {
   if (!ruta) return "";
-  const esSubcarpeta = window.location.pathname.includes("/html/");
   const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
-  return esSubcarpeta ? `../${rutaLimpia}` : rutaLimpia;
+  if (rutaLimpia.startsWith("Noble_Aroma/")) {
+    return "/" + rutaLimpia;
+  }
+  return `/Noble_Aroma/${rutaLimpia}`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
