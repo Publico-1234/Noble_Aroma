@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos | Noble Aroma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="../img/logo/logo cafe.png" type="image/png" />
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="pagina-productos">
+    <section class="titulo-catalogo animar-scroll">
+      <img src="../img/Momento de café y dulces.png" alt="Momento de café y dulces" class="titulo-imagen" />
+    </section>
+
+    <section id="destacados" class="catalogo animar-scroll" style="padding-bottom: 0;">
+      <div class="catalogo-encabezado">
+        <div>
+          <h2>Productos Destacados</h2>
+          <p>Los favoritos de nuestros clientes.</p>
+        </div>
+      </div>
+      <div class="carrusel-destacados" id="listaDestacados"></div>
+    </section>
+
+    <section class="catalogo animar-scroll">
+      <div class="catalogo-encabezado">
+        <div>
+          <h2>Explora nuestro catálogo</h2>
+          <p id="contadorProductos">Productos disponibles</p>
+        </div>
+        <div class="ordenar-productos">
+          <label for="orden">Ordenar por:</label>
+          <select id="orden">
+            <option value="destacados">Destacados</option>
+            <option value="menor">Precio: menor a mayor</option>
+            <option value="mayor">Precio: mayor a menor</option>
+            <option value="nombre">Nombre: A-Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="catalogo-contenido">
+        <button class="btn-abrir-filtros" id="btn-abrir-filtros">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
+          </svg>
+          Filtros
+        </button>
+
+        <aside class="panel-filtros" id="panel-filtros">
+          <div class="filtros-encabezado">
+            <h3>Filtros</h3>
+            <button type="button" id="cerrar-filtros" class="cerrar-panel">&times;</button>
+            <button type="button" id="limpiarFiltros">Limpiar</button>
+          </div>
+
+          <div class="filtro">
+            <label for="buscarProducto">Buscar producto</label>
+            <input type="search" id="buscarProducto" placeholder="Ej. Chocolate..." />
+          </div>
+
+          <div class="filtro">
+            <h4>Categorías</h4>
+            <label class="opcion-filtro"><input type="radio" name="categoria" value="Todas" checked /> Todos los
+              productos</label>
+            <label class="opcion-filtro"><input type="radio" name="categoria" value="reposteria" /> Postres</label>
+            <label class="opcion-filtro"><input type="radio" name="categoria" value="pan" /> Panes</label>
+            <label class="opcion-filtro"><input type="radio" name="categoria" value="aromaticas" /> Bebidas
+              aromáticas</label>
+            <label class="opcion-filtro"><input type="radio" name="categoria" value="cafe" /> Café</label>
+            <label class="opcion-filtro"><input type="radio" name="categoria" value="bebidas" /> Bebidas frías</label>
+          </div>
+
+          <div class="filtro">
+            <label for="precioMaximo">Precio máximo</label>
+            <input type="range" id="precioMaximo" min="800" max="13800" step="1000" value="13800" />
+            <p id="valorPrecio">$13.800</p>
+          </div>
+          <button type="button" id="limpiarFiltros-mobile" class="boton-confirmar"
+            style="margin-top: 15px; display: none;">Aplicar / Limpiar</button>
+        </aside>
+
+        <div class="zona-productos">
+          <div class="espacio_productos" id="listaProductos"></div>
+          <div class="sin-productos" id="sinProductos" hidden>
+            <h3>No encontramos este producto</h3>
+            <p>Intenta cambiar los filtros de búsqueda</p>
+            <button type="button" id="verTodos">Ver todos los productos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay-filtros" id="overlay-filtros"></div>
+
+  <div id="modal-pedido" class="modal-overlay">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="cerrar-modal">&times;</button>
+      <div class="modal-producto-header">
+        <img id="modal-img" src="" alt="Producto">
+        <div>
+          <h3 id="modal-nombre"></h3>
+          <p id="modal-precio" class="modal-precio"></p>
+        </div>
+      </div>
+      <form id="form-pedido" class="modal-formulario">
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" min="1" value="1" required>
+        <label>¿Cómo lo prefieres? (Puedes elegir varias)</label>
+        <div class="opciones-pedido">
+          <label class="opcion-radio"><input type="checkbox" name="preferencia" value="Normal"> Normal</label>
+          <label class="opcion-radio"><input type="checkbox" name="preferencia" value="Sin azúcar"> Sin azúcar</label>
+          <label class="opcion-radio"><input type="checkbox" name="preferencia" value="Para llevar"> Para llevar</label>
+          <label class="opcion-radio"><input type="checkbox" name="preferencia" value="Sin hielo"> Sin hielo</label>
+          <label class="opcion-radio"><input type="checkbox" name="preferencia" value="Con hielo"> Con hielo</label>
+        </div>
+        <label for="instrucciones">Instrucciones adicionales:</label>
+        <textarea id="instrucciones" placeholder="Escribe aquí tus instrucciones..."></textarea>
+        <button type="submit" class="boton-confirmar">Confirmar Pedido</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast-notificacion">
+    <p id="toast-mensaje">¡Producto agregado!</p>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <div id="overlay-carrito" class="overlay-carrito"></div>
+  <aside id="panel-carrito" class="panel-carrito">
+    <div class="panel-header">
+      <h2>Tu Carrito</h2>
+      <button class="cerrar-panel" id="cerrar-panel">&times;</button>
+    </div>
+    <div class="panel-body">
+      <div id="lista-carrito" class="lista-carrito"></div>
+      <div id="carrito-vacio" class="carrito-vacio" hidden>
+        <p>Tu carrito está vacío.</p>
+        <a href="productos.html" class="boton-leer-mas">Ver Productos</a>
+      </div>
+    </div>
+    <div class="panel-footer" id="resumen-carrito" hidden>
+      <div class="linea-resumen"><span>Subtotal</span><span id="subtotal">$0</span></div>
+      <div class="linea-resumen"><span>Envío</span><span>Gratis</span></div>
+      <div class="linea-resumen total"><span>Total</span><span id="total-final">$0</span></div>
+      <button id="btn-pagar" class="boton-confirmar">Proceder al Pago</button>
+      <button id="btn-vaciar" class="boton-vaciar">Vaciar carrito</button>
+    </div>
+  </aside>
+  <div id="modal-checkout" class="modal-overlay">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" id="cerrar-checkout">&times;</button>
+      <h2 style="font-family: 'Playfair Display', serif; color: #173D2D; margin-top: 0;">Finalizar Compra</h2>
+      <form id="form-checkout" class="modal-formulario">
+        <label>Nombre completo</label>
+        <input type="text" id="checkout-nombre" placeholder="Tu nombre" required>
+        <label>Dirección de entrega</label>
+        <input type="text" id="checkout-direccion" placeholder="Ej. Cra 24 #18-11" required>
+        <label>Teléfono de contacto</label>
+        <input type="tel" id="checkout-telefono" placeholder="Ej. 300 123 4567" required>
+        <label>Método de Pago</label>
+        <div class="opciones-pedido">
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Tarjeta de Crédito/Débito" checked>
+            Tarjeta de Crédito/Débito</label>
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Pago en Efectivo"> Pago en Efectivo
+            (Contra entrega)</label>
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Transferencia Bancaria">
+            Transferencia Bancaria</label>
+        </div>
+        <button type="submit" class="boton-confirmar">Confirmar y Pagar</button>
+      </form>
+    </div>
+  </div>
+  <script src="../js/principal.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script src="../js/productos.js"></script>
+</body>
+
+</html>
