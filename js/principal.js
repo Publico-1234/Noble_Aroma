@@ -13,6 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(data => {
         headerContainer.innerHTML = data;
         
+
+        const btnInicio = document.getElementById("inicio");
+        const logoInicio = document.querySelector(".logo-container");
+        const rutaInicio = isSubfolder ? "../index.html" : "index.html";
+
+        if (btnInicio) btnInicio.setAttribute("href", rutaInicio);
+        if (logoInicio) logoInicio.setAttribute("href", rutaInicio);
+
         const menuToggle = document.getElementById("menu-toggle");
         const navMenu = document.getElementById("nav-menu");
         if (menuToggle && navMenu) {
@@ -37,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(error => console.error("Error al cargar el footer:", error));
   }
 });
-
 function mostrarHito(indice) {
   const nodos = document.querySelectorAll('.timeline-nodo');
   const hitos = document.querySelectorAll('.timeline-hito');
