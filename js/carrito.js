@@ -145,7 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         localStorage.removeItem("carritoNobleAroma");
-        window.location.href = "/Noble_Aroma/index.html";
+        const esSubcarpeta = window.location.pathname.includes("/html/");
+        window.location.href = esSubcarpeta ? "../index.html" : "index.html";
       }, 3000);
     });
   }
