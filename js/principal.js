@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (logoImg) logoImg.src = `${prefix}img/logo/Logo-de-Cafeteria-Noble-Aroma.png`;
 
         const carroImg = headerContainer.querySelector("#Carro");
-        if (carroImg) carroImg.src = `${prefix}img/icos/01-carrito.png`;
+        if (carroImg) carroImg.src = `${prefix}img/icos/01_carrito.png`;
 
         const btnInicio = document.getElementById("inicio");
         const logoInicio = headerContainer.querySelector(".logo-container");
