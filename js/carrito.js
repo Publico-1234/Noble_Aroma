@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  function ajustarRutaImagen(ruta) {
+  function obtenerRutaImagen(ruta) {
     if (!ruta) return "";
+    const isSubfolder = window.location.pathname.includes("/html/");
     const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
-    return `/Noble_Aroma/${rutaLimpia}`;
+    return isSubfolder ? `../${rutaLimpia}` : rutaLimpia;
   }
 
   function pesos(valor) {
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lista.innerHTML = carrito.map((item, index) => `
       <div class="item-carrito">
-        <img src="${ajustarRutaImagen(item.imagen)}" alt="${item.nombre}">
+        <img src="${obtenerRutaImagen(item.imagen)}" alt="${item.nombre}">
         <div class="item-info">
           <h3>${item.nombre}</h3>
           <p class="item-notas">${item.notas || ""}</p>
@@ -81,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("click", (e) => {
-    const btnAbrirHeader = e.target.closest("#btn-abrir-carrito-global, #Carro, #btn-abrir-carrito-centro");
-    if (btnAbrirHeader) {
+    const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #btn-abrir-carrito-centro, #Carro");
+    if (btnAbrir) {
       e.preventDefault();
       const panel = document.getElementById("panel-carrito");
       const overlay = document.getElementById("overlay-carrito");
@@ -122,14 +123,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const modalCheckout = document.getElementById("modal-checkout");
       if (modalCheckout) modalCheckout.style.display = "none";
 
-      alert(`¡Pedido confirmado para ${nombre}! Gracias por tu compra en Noble Aroma.`);
+      const toast = document.createElement("div");
+      toast.className = "toast-notificacion visible";
+      toast.innerHTML = `<p>Pedido confirmado para ${nombre}. ¡Gracias por tu compra!</p>`;
+      document.body.appendChild(toast);
 
-      localStorage.removeItem("carritoNobleAroma");
-      renderizarCarritoPanel();
-      const panel = document.getElementById("panel-carrito");
-      const overlay = document.getElementById("overlay-carrito");
-      if (panel) panel.classList.remove("active");
-      if (overlay) overlay.classList.remove("active");
+      setTimeout(() => {
+        localStorage.removeItem("carritoNobleAroma");
+        renderizarCarritoPanel();
+        const isSubfolder = window.location.pathname.includes("/html/");
+        window.location.href = isSubfolder ? "../index.html" : "index.html";
+      }, 3000);
     });
   }
 
@@ -144,18 +148,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   renderizarCarritoPanel();
-});
-
-document.addEventListener("click", (e) => {
-  const btnAbrir = e.target.closest("#btn-abrir-carrito-global, #btn-abrir-carrito-centro, #Carro");
-  if (btnAbrir) {
-    e.preventDefault();
-    const panelCarrito = document.getElementById("panel-carrito");
-    const overlayCarrito = document.getElementById("overlay-carrito");
-    if (panelCarrito && overlayCarrito) {
-      renderizarCarritoPanel();
-      panelCarrito.classList.add("active");
-      overlayCarrito.classList.add("active");
-    }
-  }
 });
