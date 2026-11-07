@@ -1,19 +1,19 @@
 const productos = [
-  { id: 1, nombre: "Galletas NY", categoria: "reposteria", precio: 6500, imagen: "img/productos/galletas-NY.jpeg" },
+  { id: 1, nombre: "Galletas NY", categoria: "reposteria", precio: 6500, imagen: "img/productos/galletasNY.jpeg" },
   { id: 2, nombre: "Torta de zanahoria", categoria: "reposteria", precio: 8500, imagen: "img/productos/Torta-de-zanahoria.jpeg" },
   { id: 3, nombre: "Cheesecake", categoria: "reposteria", precio: 12000, imagen: "img/productos/cheesecake.jpeg" },
   { id: 4, nombre: "Espiral de queso", categoria: "reposteria", precio: 5000, imagen: "img/productos/Espiral-de-queso.jpeg" },
   { id: 5, nombre: "Mini croissant", categoria: "pan", precio: 800, imagen: "img/productos/Mini-Croissant.jpeg" },
   { id: 6, nombre: "Pan de queso", categoria: "pan", precio: 2000, imagen: "img/productos/Pan-de-queso.webp" },
   { id: 7, nombre: "Croissant de chocolate", categoria: "pan", precio: 12000, imagen: "img/productos/pan-de-chocolate.png" },
-  { id: 8, nombre: "Croissant de arequipe", categoria: "pan", precio: 12000, imagen: "img/productos/Croissant-de...requipe.jpeg" },
+  { id: 8, nombre: "Croissant de arequipe", categoria: "pan", precio: 12000, imagen: "img/productos/Croissant-de-arequipe.jpeg" },
   { id: 9, nombre: "Pan de mantequilla", categoria: "pan", precio: 3000, imagen: "img/productos/Pan-de-mantequilla.jpeg" },
   { id: 10, nombre: "Deditos horneados", categoria: "pan", precio: 4000, imagen: "img/productos/Deditos-horneados.jpg" },
   { id: 11, nombre: "Brownie", categoria: "reposteria", precio: 8000, imagen: "img/productos/Brownie.jpg" },
   { id: 12, nombre: "Sandwich", categoria: "pan", precio: 13500, imagen: "img/productos/sandwich.png" },
   { id: 13, nombre: "Pan súper queso", categoria: "pan", precio: 5000, imagen: "img/productos/Pan-super-queso.webp" },
-  { id: 14, nombre: "Aromática de manzanilla", categoria: "aromaticas", precio: 3000, imagen: "img/productos/Aromatica-d...nzanilla.jpeg" },
-  { id: 15, nombre: "Aromática de hierbabuena", categoria: "aromaticas", precio: 3000, imagen: "img/productos/Aromatica-d...abuena.jpeg" },
+  { id: 14, nombre: "Aromática de manzanilla", categoria: "aromaticas", precio: 3000, imagen: "img/productos/Aromatica-de-manzanilla.jpeg" },
+  { id: 15, nombre: "Aromática de hierbabuena", categoria: "aromaticas", precio: 3000, imagen: "img/productos/Aromatica-de-hierbabuena.jpeg" },
   { id: 16, nombre: "Té negro", categoria: "aromaticas", precio: 3000, imagen: "img/productos/Te-negro.jpg" },
   { id: 17, nombre: "Aromática natural de frutos rojos", categoria: "aromaticas", precio: 3000, imagen: "img/productos/aromaticas.jpeg" },
   { id: 18, nombre: "Café tinto", categoria: "cafe", precio: 3000, imagen: "img/productos/Cafe-tinto.webp" },
@@ -21,12 +21,12 @@ const productos = [
   { id: 20, nombre: "Café Amaretto", categoria: "cafe", precio: 5000, imagen: "img/productos/Cafe-Amaretto.webp" },
   { id: 21, nombre: "Cappuccino", categoria: "cafe", precio: 10000, imagen: "img/productos/Cappuccino.png" },
   { id: 22, nombre: "Cappuccino Coco", categoria: "cafe", precio: 10000, imagen: "img/productos/Cappuccino-Coco.jpg" },
-  { id: 23, nombre: "Cappuccino Frutos Rojos", categoria: "cafe", precio: 10000, imagen: "img/productos/Cappuccino-...s-Rojos.png" },
+  { id: 23, nombre: "Cappuccino Frutos Rojos", categoria: "cafe", precio: 10000, imagen: "img/productos/Cappuccino-Frutos-Rojos.png" },
   { id: 24, nombre: "Latte", categoria: "cafe", precio: 7000, imagen: "img/productos/Latte.jpg" },
   { id: 25, nombre: "Mocaccino caliente", categoria: "cafe", precio: 3000, imagen: "img/productos/Mocaccino-caliente.avif" },
   { id: 26, nombre: "Mocaccino frío", categoria: "cafe", precio: 11000, imagen: "img/productos/Mocaccino-frio.png" },
   { id: 27, nombre: "Latte frío", categoria: "cafe", precio: 8000, imagen: "img/productos/Latte-frio.webp" },
-  { id: 28, nombre: "Coca Cola", categoria: "bebidas", precio: 3000, imagen: "img/productos/coca-cola.jpg" },
+  { id: 28, nombre: "Coca Cola", categoria: "bebidas", precio: 3000, imagen: "img/productos/Coca-Cola.jpg" },
   { id: 29, nombre: "Néctar en caja", categoria: "bebidas", precio: 3000, imagen: "img/productos/Nectar-en-caja.jpeg" },
   { id: 30, nombre: "Agua", categoria: "bebidas", precio: 2000, imagen: "img/productos/Agua.png" },
   { id: 31, nombre: "Jugo natural en agua", categoria: "bebidas", precio: 7000, imagen: "img/productos/jugo.png" },
@@ -41,8 +41,9 @@ function normalizarTexto(texto) {
 
 function obtenerRutaImagen(ruta) {
   if (!ruta) return "";
+  const esSubcarpeta = window.location.pathname.includes("/html/");
   const rutaLimpia = ruta.replace(/^(\.\.\/|\/)/, "");
-  return `/Noble_Aroma/${rutaLimpia}`;
+  return esSubcarpeta ? `../${rutaLimpia}` : rutaLimpia;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -68,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalImg = document.getElementById("modal-img");
   const modalNombre = document.getElementById("modal-nombre");
   const modalPrecio = document.getElementById("modal-precio");
-  
+
   const toast = document.getElementById("toast");
   const toastMensaje = document.getElementById("toast-mensaje");
 
@@ -214,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (buscador) buscador.addEventListener("input", filtrarProductos);
   if (precioMaximo) precioMaximo.addEventListener("input", actualizarPrecio);
   if (orden) orden.addEventListener("change", filtrarProductos);
-  
+
   document.querySelectorAll('input[name="categoria"]').forEach((radio) => {
     radio.addEventListener("change", filtrarProductos);
   });
@@ -227,20 +228,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function abrirModal(evento) {
     const boton = evento.target.closest(".boton-producto, .tarjeta-destacado");
     if (!boton) return;
-    
+
     const id = Number(boton.dataset.id);
     productoSeleccionado = productos.find((item) => item.id === id);
-    
+
     if (productoSeleccionado && modal) {
       modalImg.src = obtenerRutaImagen(productoSeleccionado.imagen);
       modalNombre.textContent = productoSeleccionado.nombre;
       modalPrecio.textContent = pesos(productoSeleccionado.precio);
       document.getElementById("cantidad").value = 1;
-      
+
       const checkboxes = document.querySelectorAll('input[name="preferencia"]');
       checkboxes.forEach(chk => chk.checked = false);
-      
-      modal.style.display = "flex"; 
+
+      modal.style.display = "flex";
     }
   }
 
@@ -262,12 +263,12 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const cantidad = parseInt(document.getElementById("cantidad").value);
       const checkboxesMarcados = document.querySelectorAll('input[name="preferencia"]:checked');
-      
+
       let preferenciasSeleccionadas = [];
       checkboxesMarcados.forEach((checkbox) => preferenciasSeleccionadas.push(checkbox.value));
-      
+
       const notas = preferenciasSeleccionadas.length > 0 ? preferenciasSeleccionadas.join(", ") : "Normal";
-      
+
       const pedido = {
         id: productoSeleccionado.id,
         nombre: productoSeleccionado.nombre,
@@ -282,10 +283,17 @@ document.addEventListener("DOMContentLoaded", () => {
       carrito.push(pedido);
       localStorage.setItem("carritoNobleAroma", JSON.stringify(carrito));
 
+      modal.style.display = "none";
       window.dispatchEvent(new Event("carritoActualizado"));
 
+      const panel = document.getElementById("panel-carrito");
+      const overlay = document.getElementById("overlay-carrito");
+      if (panel && overlay) {
+        panel.classList.add("active");
+        overlay.classList.add("active");
+      }
+
       mostrarToast(`¡${pedido.nombre} agregado!`);
-      modal.style.display = "none";
     });
   }
 
