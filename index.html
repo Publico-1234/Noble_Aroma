@@ -4,28 +4,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noble Aroma</title>
+  <title>Noble Aroma | Cafetería & Repostería</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="img/logo/logo cafe.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="img/logo/Logo-de-Cafeteria-Noble-Aroma.png" type="image/png" />
 </head>
 
 <body>
-<div id="header-placeholder"></div>
+  <div id="header-placeholder"></div>
 
   <section class="hero-video">
-    <video autoplay loop muted playsinline class="video-fondo">
-      <source src="/img/video-marca 9.58.02 a.m..mp4" type="video/mp4">
+    <video class="video-fondo" autoplay loop muted playsinline>
+      <source src="img/video-marca.mp4" type="video/mp4">
+      Tu navegador no soporta videos HTML5.
     </video>
     <div class="hero-video-overlay">
       <span class="titulo-etiqueta" style="color: #B7C98A;">BIENVENIDO A NOBLE AROMA</span>
-      <h1>El arte de pausar,<br>en cada taza.</h1>
+      <h1>El arte de pausar, en cada taza.</h1>
       <p>Momentos que se saborean, café que se recuerda.</p>
-      <a href="productos.html" class="boton-leer-mas">Descubrir el menú</a>
+      <a href="html/productos.html" class="boton-leer-mas">Descubrir el menú</a>
     </div>
   </section>
 
@@ -33,7 +34,7 @@
     <div class="historia-inicio-contenedor">
       <div class="historia-inicio-imagen-wrapper">
         <div class="historia-inicio-imagen">
-          <img src="../img/dueñosylocal.jpeg" alt="Hermanos Noble Montes">
+          <img src="img/dueñosylocal.jpeg" alt="Hermanos Noble Montes">
         </div>
         <div class="tarjeta-fundador">
           <h4>Hermanos Noble Montes</h4>
@@ -42,94 +43,81 @@
       </div>
       <div class="historia-inicio-contenido">
         <span class="titulo-etiqueta">NUESTRA HISTORIA</span>
-        <h2>Un sueño familiar hecho realidad</h2>
-        <p>El negocio nació a partir de la idea de los <strong>hermanos Noble Montes</strong>, quienes soñaban con crear
-          un emprendimiento diferente a las labores que cada uno realiza en su día a día.</p>
-        <p>La iniciativa surgió del deseo de compartir un proyecto en familia, construir algo propio y ofrecer a las
-          personas un espacio agradable donde pudieran disfrutar de un buen café y momentos especiales.</p>
-        <a href="conocenos.html" class="boton-leer-mas">LEER MÁS</a>
+        <h2>Un sueño familiar impulsado por el esfuerzo y la pasión</h2>
+        <p>El negocio nació a partir de la idea de los hermanos Noble Montes, quienes soñaban con crear un emprendimiento diferente a las labores que cada uno realiza en su día a día. La iniciativa surgió del deseo de compartir un proyecto en familia, construir algo propio y ofrecer a las personas un espacio agradable donde pudieran disfrutar de un buen café y momentos especiales.</p>
+        <p>Con dedicación, entusiasmo y el apoyo entre hermanos, esa idea poco a poco fue tomando forma hasta convertirse en un proyecto lleno de ilusión y nuevos retos.</p>
+        <a href="html/conocenos.html" class="boton-leer-mas">Leer nuestra historia completa</a>
       </div>
     </div>
   </section>
 
   <section class="categorias-inicio animar-scroll">
-    <div class="content-container">
-      <span class="titulo-etiqueta" style="text-align: center; display: block; margin-bottom: 10px;">NUESTRA
-        VARIEDAD</span>
-      <h2
-        style="text-align: center; font-family: 'Playfair Display', serif; color: #173D2D; font-size: 36px; margin-bottom: 40px;">
-        Compra por categorías</h2>
-      <div class="grid-categorias">
-        <a href="productos.html?categoria=cafe" class="categoria-card">
-          <img src="../img/1.jpeg" alt="Café">
-          <div class="categoria-overlay">
-            <h3>Café</h3>
-            <span class="btn-ver-categoria">Ver todo</span>
-          </div>
-        </a>
-        <a href="productos.html?categoria=reposteria" class="categoria-card">
-          <img src="../img/2.jpeg" alt="Repostería">
-          <div class="categoria-overlay">
-            <h3>Repostería</h3>
-            <span class="btn-ver-categoria">Ver todo</span>
-          </div>
-        </a>
-        <a href="productos.html?categoria=aromaticas" class="categoria-card">
-          <img src="../img/3.jpeg" alt="Aromáticas">
-          <div class="categoria-overlay">
-            <h3>Aromáticas</h3>
-            <span class="btn-ver-categoria">Ver todo</span>
-          </div>
-        </a>
-        <a href="productos.html?categoria=bebidas" class="categoria-card">
-          <img src="../img/4.png" alt="Bebidas Frías">
-          <div class="categoria-overlay">
-            <h3>Bebidas Frías</h3>
-            <span class="btn-ver-categoria">Ver todo</span>
-          </div>
-        </a>
-      </div>
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="titulo-etiqueta">EXPLORA NUESTRO MENÚ</span>
+      <h2 style="font-size: 36px; color: #173D2D; margin-top: 5px;">Variedad para cada momento</h2>
+    </div>
+    <div class="grid-categorias">
+      <a href="html/productos.html?categoria=cafe" class="categoria-card">
+        <img src="img/productos/Cappuccino.png" alt="Café de Especialidad">
+        <div class="categoria-overlay">
+          <h3>Cafés</h3>
+          <span class="btn-ver-categoria">Ver Variedades</span>
+        </div>
+      </a>
+      <a href="html/productos.html?categoria=reposteria" class="categoria-card">
+        <img src="img/productos/cheesecake.jpeg" alt="Repostería Artesanal">
+        <div class="categoria-overlay">
+          <h3>Repostería</h3>
+          <span class="btn-ver-categoria">Ver Postres</span>
+        </div>
+      </a>
+      <a href="html/productos.html?categoria=pan" class="categoria-card">
+        <img src="img/productos/Pan-de-queso.webp" alt="Panadería">
+        <div class="categoria-overlay">
+          <h3>Panadería</h3>
+          <span class="btn-ver-categoria">Ver Panes</span>
+        </div>
+      </a>
+      <a href="html/productos.html?categoria=aromaticas" class="categoria-card">
+        <img src="img/productos/aromaticas.jpeg" alt="Bebidas Frías y Té">
+        <div class="categoria-overlay">
+          <h3>Infusiones</h3>
+          <span class="btn-ver-categoria">Ver Bebidas</span>
+        </div>
+      </a>
     </div>
   </section>
 
-  <section class="frase-arco animar-scroll">
-    <svg viewBox="0 0 1600 250" class="texto-arco-svg" preserveAspectRatio="xMidYMid slice">
-      <path id="curva-gusano" d="M -200,150 Q 200,20 600,150 T 1400,150 T 2200,150" fill="transparent" />
-      <text>
-        <textPath href="#curva-gusano" startOffset="0%">
-          BELLEZA FLORECE AQUÍ · MOMENTOS QUE SE SABOREAN · TU BELLEZA FLORECE AQUÍ · CAFÉ DE ESPECIALIDAD · BELLEZA
-          FLORECE AQUÍ · MOMENTOS QUE SE SABOREAN · TU BELLEZA FLORECE AQUÍ · CAFÉ DE ESPECIALIDAD · BELLEZA FLORECE
-          AQUÍ · MOMENTOS QUE SE SABOREAN ·
+  <section class="frase-arco">
+    <svg class="texto-arco-svg" viewBox="0 0 1000 120" xmlns="http://www.w3.org/2000/svg">
+      <path id="curvaGusano" d="M 0 60 Q 250 10 500 60 T 1000 60" fill="none" stroke="transparent" />
+      <text font-family="'Cinzel', serif" font-weight="700">
+        <textPath href="#curvaGusano" startOffset="0%">
+          NOBLE AROMA • EL ARTE DE PAUSAR EN CADA TAZA • UN SUEÑO FAMILIAR • NOBLE AROMA • EL ARTE DE PAUSAR EN CADA TAZA • UN SUEÑO FAMILIAR •
         </textPath>
       </text>
     </svg>
   </section>
 
   <section class="visitanos animar-scroll">
-    <div class="visitanos-contenedor">
-      <span class="titulo-etiqueta">VISÍTANOS</span>
-      <h2>Nuestro Local y Ubicación</h2>
-      <div class="visitanos-grid">
-        <a href="conocenos.html" class="visitanos-card enlace-tarjeta">
-          <img src="../img/LOCAL.jpeg" alt="Nuestro Local">
-          <h3>Conoce nuestro espacio</h3>
-          <p><strong>Ubicación:</strong> Cra 24 #18-11 frente a edificio Mediterráneo</p>
-          <p><strong>Días de semana:</strong> 8:00 am - 5:00 pm</p>
-          <p><strong>Fines de semana:</strong> 9:30 am - 7:00 pm</p>
-        </a>
-        <a href="https://www.google.com/maps/@9.3065624,-75.4027481,15z?entry=ttu&g_ep=EgoyMDI2MTEwMy4wIKXMDSoASAFQAw%3D%3D"
-          target="_blank" rel="noopener noreferrer" class="visitanos-card enlace-tarjeta">
-          <img src="../img/UBI.jpeg" alt="Ubicación Noble Aroma">
-          <h3>¿Cómo llegar?</h3>
-          <p>Encuéntranos en nuestra sede principal y disfruta de un momento especial en familia o con amigos.</p>
-          <p><strong>Teléfonos:</strong> 311 712 4076 | 313 799 7932</p>
-          <p style="color: #A35C37; font-weight: 600; margin-top: 10px;">Toca aquí para abrir en Google Maps &rarr;</p>
-        </a>
+    <span class="titulo-etiqueta">TE ESPERAMOS</span>
+    <h2>Ven a vivir la experiencia Noble Aroma</h2>
+    <div class="visitanos-grid">
+      <div class="visitanos-card">
+        <img src="img/local.jpeg" alt="Nuestro Local">
+        <h3>Un Ambiente Acogedor</h3>
+        <p>Diseñado para que disfrutes de tu café preferido en un espacio cómodo y de excelente atención.</p>
+      </div>
+      <div class="visitanos-card">
+        <img src="img/ubi.jpeg" alt="Ubicación">
+        <h3>Fácil Ubicación</h3>
+        <p>Estamos situados en un lugar estratégico para acompañarte en tus pausas diarias.</p>
       </div>
     </div>
   </section>
- <div id="footer-placeholder"></div>
-  
+
+  <div id="footer-placeholder"></div>
+
   <div id="overlay-carrito" class="overlay-carrito"></div>
   <aside id="panel-carrito" class="panel-carrito">
     <div class="panel-header">
@@ -140,7 +128,7 @@
       <div id="lista-carrito" class="lista-carrito"></div>
       <div id="carrito-vacio" class="carrito-vacio" hidden>
         <p>Tu carrito está vacío.</p>
-        <a href="productos.html" class="boton-leer-mas">Ver Productos</a>
+        <a href="html/productos.html" class="boton-leer-mas">Ver Productos</a>
       </div>
     </div>
     <div class="panel-footer" id="resumen-carrito" hidden>
@@ -151,6 +139,7 @@
       <button id="btn-vaciar" class="boton-vaciar">Vaciar carrito</button>
     </div>
   </aside>
+
   <div id="modal-checkout" class="modal-overlay">
     <div class="modal-contenido">
       <button class="modal-cerrar" id="cerrar-checkout">&times;</button>
@@ -164,19 +153,17 @@
         <input type="tel" id="checkout-telefono" placeholder="Ej. 300 123 4567" required>
         <label>Método de Pago</label>
         <div class="opciones-pedido">
-          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Tarjeta de Crédito/Débito" checked>
-            Tarjeta de Crédito/Débito</label>
-          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Pago en Efectivo"> Pago en Efectivo
-            (Contra entrega)</label>
-          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Transferencia Bancaria">
-            Transferencia Bancaria</label>
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Tarjeta de Crédito/Débito" checked> Tarjeta de Crédito/Débito</label>
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Pago en Efectivo"> Pago en Efectivo (Contra entrega)</label>
+          <label class="opcion-radio"><input type="radio" name="metodo-pago" value="Transferencia Bancaria"> Transferencia Bancaria</label>
         </div>
         <button type="submit" class="boton-confirmar">Confirmar y Pagar</button>
       </form>
     </div>
   </div>
- <script src="js/principal.js"></script>
-<script src="js/carrito.js"></script>
+
+  <script src="js/principal.js"></script>
+  <script src="js/carrito.js"></script>
 </body>
 
 </html>
